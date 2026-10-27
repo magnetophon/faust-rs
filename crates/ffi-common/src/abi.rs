@@ -361,7 +361,14 @@ int main(void) { return 0; }
             std::fs::write(&source, source_text).expect("write ABI smoke source");
             let output = Command::new(&compiler)
                 .arg(standard)
-                .args(["-Wall", "-Wextra", "-Werror", "-pedantic", "-fsyntax-only"])
+                .args([
+                    "-Wall",
+                    "-Wextra",
+                    "-Werror",
+                    "-Wno-unused-command-line-argument",
+                    "-pedantic",
+                    "-fsyntax-only",
+                ])
                 .arg("-I")
                 .arg(&include)
                 .arg(&source)
